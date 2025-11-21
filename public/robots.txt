@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /private/
+Disallow: /temp/
+Disallow: /admin/
+Disallow: /draft/
+Allow: /
+
+# Prevent crawling of source maps and build files
+Disallow: /*.map$
+Disallow: /assets/
+
+# Sitemap (update this to your real URL)
+Sitemap: http://localhost:4173/sitemap.xml

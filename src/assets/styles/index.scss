@@ -1,0 +1,54 @@
+@use 'fonts' as *;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @apply relative w-full
+      bg-white dark:bg-black
+      text-black dark:text-white
+      scroll-smooth
+      antialiased
+      will-change-transform
+      transform-gpu;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: calc(var(--spacing-base) / 2);
+    line-height: 1.2;
+    scroll-margin-top: 1rem;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-base);
+    line-height: 1.5;
+  }
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
