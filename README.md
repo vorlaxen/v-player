@@ -79,13 +79,71 @@ Plugins are:
 
 ### Example Plugin Categories
 
-| Plugin           | Purpose                                |
-| ---------------- | -------------------------------------- |
-| MP4Plugin        | Native MP4 playback                    |
-| HLSPlugin        | Adaptive streaming via HLS             |
-| MetadataPlugin   | Platform-specific metadata integration |
-| AudioBoostPlugin | WebAudio dynamic gain & normalization  |
-| ADSPlugin        | Advertisement system                   |
+| Plugin             | Purpose                                      |
+| ------------------ | -------------------------------------------- |
+| MP4Plugin          | Native MP4 playback                          |
+| HLSPlugin          | Adaptive streaming via HLS                   |
+| MetadataPlugin     | Platform-specific metadata integration       |
+| AudioPlugin        | Advanced audio pipeline & processing layer   |
+| SleepTimerPlugin   | Playback auto-stop scheduling system         |
+| ADSPlugin          | Advertisement system                         |
+| IframeBridgePlugin | Cross-window / embedded player communication |
+
+---
+
+## 🔊 AudioPlugin
+
+`AudioPlugin` replaces the old AudioBoost-specific design and provides a more extensible audio processing layer.
+
+Capabilities:
+
+* Volume normalization
+* Dynamic gain control
+* Custom audio graph injection
+* Toggleable enhancement pipeline
+* Future support for spatial audio or advanced DSP modules
+
+Built on top of the Web Audio API with a controlled and isolated audio graph.
+
+The design allows stacking multiple audio processors internally without leaking implementation details to the core.
+
+---
+
+## ⏳ SleepTimerPlugin
+
+The `SleepTimerPlugin` enables timed playback shutdown.
+
+Features:
+
+* Set timer (e.g., 10 / 30 / 60 minutes)
+* Emits scheduled stop events
+* Graceful pause instead of hard stop
+* Fully event-driven
+
+Ideal for long-form content platforms (courses, podcasts, series playback).
+
+The timer logic is isolated and does not directly control media — it only emits typed events.
+
+---
+
+## 🪟 IframeBridgePlugin
+
+The `IframeBridgePlugin` enables secure communication between:
+
+* Embedded players
+* Parent windows
+* Cross-origin iframe integrations
+
+Built on top of `postMessage` with strict message typing.
+
+Capabilities:
+
+* Parent → Player control (play, pause, seek)
+* Player → Parent analytics events
+* Strict origin validation
+* Typed message contracts
+
+This makes the engine embeddable in LMS systems, SaaS dashboards, or third-party platforms without modifying the core.
 
 ---
 
@@ -101,7 +159,8 @@ All interactions flow through a strictly typed `EventBus`.
 * `qualityChange`
 * `audioChange`
 * `metadataLoaded`
-* `volumeBoostApplied`
+* `sleepTimerTriggered`
+* `iframeMessageReceived`
 
 Each event:
 
@@ -140,19 +199,6 @@ The core interacts only through the plugin interface — never directly with for
 * Independent from quality pipeline
 
 Both systems are designed to be reusable across plugins.
-
----
-
-## 🔊 WebAudio Processing
-
-The `AudioBoostPlugin` provides:
-
-* Automatic volume normalization
-* Peak detection
-* Dynamic gain adjustment
-* Toggle ON/OFF support
-
-Built on top of the Web Audio API with a controlled audio graph.
 
 ---
 
@@ -195,7 +241,9 @@ src/
  │   ├── MP4Plugin/
  │   ├── HLSPlugin/
  │   ├── MetadataPlugin/
- │   └── AudioBoostPlugin/
+ │   ├── AudioPlugin/
+ │   ├── SleepTimerPlugin/
+ │   └── IframeBridgePlugin/
  │
  ├── components/
  ├── hooks/
@@ -254,6 +302,8 @@ This project is licensed under the **Creative Commons Attribution-NonCommercial-
 🛡️ **Commercial Use is Strictly Prohibited.** If you intend to use this engine for a commercial product, please contact the author for a separate commercial license.
 
 [View License Summary](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+---
 
 ## ✨ Final Note
 
