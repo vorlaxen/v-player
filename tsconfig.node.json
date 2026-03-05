@@ -4,7 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
-    "types": ["node", "redux", "react-redux"],
+    "types": ["node"],
     "ignoreDeprecations": "6.0"
   },
   "include": ["vite.config.ts"]
