@@ -8,11 +8,6 @@ module.exports = {
       }
     },
   },
-  safelist: [
-    {
-      pattern: /data-\[controller=visible\]/,
-    },
-  ],
   darkMode: 'class',
   plugins: [],
 }
