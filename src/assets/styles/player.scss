@@ -1,0 +1,7 @@
+.gesture-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: transparent;
+  touch-action: manipulation; // double tap zoom engel
+}
