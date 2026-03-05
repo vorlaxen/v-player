@@ -1,4 +1,4 @@
-# 🎬 V-Player Core
+# 🎬 Vorlaxen's Web Player
 
 Enterprise-grade, modular, event-driven video player engine built with **TypeScript + React + Vite**.
 
